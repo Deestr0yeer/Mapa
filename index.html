@@ -1,49 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Mapa Piłki Nożnej</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Storymap: Piłka Nożna</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-storymap@1.0.1/dist/leaflet.storymap.js"></script>
-  <style>
-    body { margin:0; padding:0; }
-    #map { height: 100vh; }
-  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
+  <div id="map" style="height: 500px;"></div>
 
-<div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([51.505, -0.09], 2);
 
-<script>
-  var map = L.map('map').setView([0, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+    var places = [
+      { name: 'Camp Nou', description: 'Barcelona, Hiszpania', coordinates: [41.3809, 2.1228] },
+      { name: 'Wembley Stadium', description: 'Londyn, Wielka Brytania', coordinates: [51.556, -0.279] },
+      { name: 'Allianz Arena', description: 'Monachium, Niemcy', coordinates: [48.2188, 11.6246] },
+      { name: 'San Siro', description: 'Mediolan, Włochy', coordinates: [45.478, 9.124] },
+      { name: 'Signal Iduna Park', description: 'Dortmund, Niemcy', coordinates: [51.492, 7.451] },
+      { name: 'Old Trafford', description: 'Manchester, Wielka Brytania', coordinates: [53.463, -2.291] },
+      { name: 'Santiago Bernabéu', description: 'Madryt, Hiszpania', coordinates: [40.4531, -3.6883] },
+      { name: 'Emirates Stadium', description: 'Londyn, Wielka Brytania', coordinates: [51.5549, -0.1084] },
+      { name: 'Anfield', description: 'Liverpool, Wielka Brytania', coordinates: [53.4308, -2.9608] },
+      { name: 'Stade de France', description: 'Saint-Denis, Francja', coordinates: [48.9245, 2.3608] },
+      // Dodaj kolejne miejsca...
+    ];
 
-  var story = [
-    { lat: 51.505, lon: -0.09, zoom: 13, content: '<h2>Historia Piłki Nożnej</h2><p>Tutaj możesz opowiedzieć krótką historię piłki nożnej.</p>' },
-    { lat: -22.9083, lon: -43.1964, zoom: 13, content: '<h2>Maracanã, Rio de Janeiro, Brazylia</h2><p>Jeden z najważniejszych stadionów piłkarskich na świecie.</p>' },
-    { lat: 41.3809, lon: 2.1228, zoom: 13, content: '<h2>Kamp Nou, Barcelona, Hiszpania</h2><p>Dom klubu FC Barcelona.</p>' },
-    { lat: -33.9248, lon: 18.4233, zoom: 13, content: '<h2>Stadion Cape Town, Cape Town, RPA</h2><p>Malowniczy stadion przybrzeżny.</p>' },
-    { lat: -34.6177, lon: -58.365, zoom: 13, content: '<h2>La Bombonera, Buenos Aires, Argentyna</h2><p>Słynny stadion klubu Boca Juniors.</p>' },
-    { lat: 48.8588, lon: 2.2944, zoom: 13, content: '<h2>Stade de France, Saint-Denis, Francja</h2><p>Stadion narodowy Francji.</p>' },
-    { lat: 55.7508, lon: 37.6176, zoom: 13, content: '<h2>Otkritie Arena, Moskwa, Rosja</h2><p>Stadion klubu Spartak Moskwa.</p>' },
-    { lat: -22.9121, lon: -43.2302, zoom: 13, content: '<h2>Estádio do Maracanã, Rio de Janeiro, Brazylia</h2><p>Odnowiona wersja słynnego stadionu.</p>' },
-    { lat: 51.556, lon: -0.2795, zoom: 13, content: '<h2>Wembley Stadium, Londyn, Wielka Brytania</h2><p>Dom angielskiego futbolu.</p>' },
-    { lat: 37.396, lon: -5.9823, zoom: 13, content: '<h2>Estadio Ramón Sánchez Pizjuán, Sewilla, Hiszpania</h2><p>Stadion klubu Sevilla FC.</p>' },
-  ];
-
-  var bounds = [];
-  for (var i = 0; i < story.length; i++) {
-    bounds.push([story[i].lat, story[i].lon]);
-  }
-  map.fitBounds(bounds);
-
-  var storymap = L.storymap(map, story);
-</script>
-
+    places.forEach(function(place) {
+      var marker = L.marker(place.coordinates).addTo(map);
+      marker.bindPopup('<b>' + place.name + '</b><br>' + place.description);
+    });
+  </script>
 </body>
 </html>
