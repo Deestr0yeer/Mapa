@@ -1,40 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Mapa Piłki Nożnej</title>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Storymap</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    /* Dodaj stylizację tutaj */
+    body { margin: 0; padding: 0; }
+    #map { height: 100vh; }
+  </style>
 </head>
 <body>
-  <div id="map" style="height: 500px;"></div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    var map = L.map('map').setView([51.505, -0.09], 2);
+<div id="map"></div>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-storymap/dist/leaflet-storymap.js"></script>
+<script src="script.js"></script>
 
-    var places = [
-      { name: 'Camp Nou', description: 'Barcelona, Hiszpania', coordinates: [41.3809, 2.1228] },
-      { name: 'Wembley Stadium', description: 'Londyn, Wielka Brytania', coordinates: [51.556, -0.279] },
-      { name: 'Allianz Arena', description: 'Monachium, Niemcy', coordinates: [48.2188, 11.6246] },
-      { name: 'San Siro', description: 'Mediolan, Włochy', coordinates: [45.478, 9.124] },
-      { name: 'Signal Iduna Park', description: 'Dortmund, Niemcy', coordinates: [51.492, 7.451] },
-      { name: 'Old Trafford', description: 'Manchester, Wielka Brytania', coordinates: [53.463, -2.291] },
-      { name: 'Santiago Bernabéu', description: 'Madryt, Hiszpania', coordinates: [40.4531, -3.6883] },
-      { name: 'Emirates Stadium', description: 'Londyn, Wielka Brytania', coordinates: [51.5549, -0.1084] },
-      { name: 'Anfield', description: 'Liverpool, Wielka Brytania', coordinates: [53.4308, -2.9608] },
-      { name: 'Stade de France', description: 'Saint-Denis, Francja', coordinates: [48.9245, 2.3608] },
-      // Dodaj kolejne miejsca...
-    ];
-
-    places.forEach(function(place) {
-      var marker = L.marker(place.coordinates).addTo(map);
-      marker.bindPopup('<b>' + place.name + '</b><br>' + place.description);
-    });
-  </script>
 </body>
 </html>
